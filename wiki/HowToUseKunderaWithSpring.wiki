@@ -63,12 +63,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Richard Grossman (richardg@wix.com)
- * Date: Jul 25, 2010
- * Time: 10:56:41 AM
- */
 @Entity
 @ColumnFamily(keyspace = "Keyspace1", family = "SimpleComment")
 @XmlRootElement(name = "SimpleComment")
@@ -105,12 +99,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Richard Grossman (richardg@wix.com)
- * Date: Jul 25, 2010
- * Time: 11:28:36 AM
- */
 @Service
 public class KuneraService {
     
