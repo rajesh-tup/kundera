@@ -41,7 +41,56 @@ and repository entry-
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+                <repository>
+			<id>kundera-missing</id>
+			<name>Kundera Public Missing Resources Repository</name>
+			<url>http://kundera.googlecode.com/svn/maven2/maven-missing-resources/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 }}} 
 
-The only remaining thing might be adding the libraries required by kundera- look in kundera pom dependencies for more detail
+The only remaining thing is adding the maven artifacts not available in public repositories. These have been added to a kundera itself. The dependencies for these libraries are-
+{{{
+                <dependency>
+			<groupId>org.apache.cassandra</groupId>
+			<artifactId>apache-cassandra</artifactId>
+			<version>0.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>libthrift</groupId>
+			<artifactId>libthrift</artifactId>
+			<version>r917130</version>
+		</dependency>
+		<dependency>
+			<groupId>pelops</groupId>
+			<artifactId>pelops</artifactId>
+			<version>UNKNOWN</version>
+			</dependency>
+		<!-- Required for running  tests  for embedded cassandra mode-->
+		<dependency>
+			<groupId>org.cliffc</groupId>
+			<artifactId>high-scale-lib</artifactId>
+			<version>UNKNOWN</version>
+		</dependency>
+		<dependency>
+			<groupId>com.reardencommerce</groupId>
+			<artifactId>clhm-production</artifactId>
+			<version>UNKNOWN</version>
+		</dependency>
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.9.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>lucandra</groupId>
+			<artifactId>lucandra</artifactId>
+			<version>UNKNOWN</version>
+		</dependency>
+}}}
