@@ -4,7 +4,7 @@
 The best way of using kundera is to build from code by downloading it and using -
 {{{mvn clean install}}}.
 
-The problem is that Cassandra, Thrift and Pelops are still not available on a public library. Hence, currently the lib folder in kundera subversion contains all the libraries required for building kundera. The dependencies are then used in system scope.
+The problem is that Cassandra, Thrift and Pelops are still not available on a public library. So these libraries have added to kundera svn hosted maven repository. The other solution is to pick these from lib folder in kundera subversion which contains all the libraries required for building kundera and use system scope as dependency.
 
 Any project using maven can easily use kundera by adding the following dependency-
 {{{
@@ -55,7 +55,7 @@ and repository entry-
 	</repositories>
 }}} 
 
-The only remaining thing is adding the maven artifacts not available in public repositories. These have been added to a kundera itself. The dependencies for these libraries are-
+The only remaining thing is adding the maven artifacts not available in public repositories. The dependencies for these libraries are-
 {{{
                 <dependency>
 			<groupId>org.apache.cassandra</groupId>
