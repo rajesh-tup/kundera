@@ -1,10 +1,9 @@
-= How to use Kundera with Spring 3.0 =
+= How to use Kundera with Spring =
 
 == Introduction ==
-We'll present here how to use Kundera with Spring 3.0. For everyone that use Spring you already knows that the tandem Spring + Hibernate is one of the most powerful combination of framework to access Database code with a minimum java code to write.
+We'll present here how to use Kundera with Spring (from 2.5). Spring + Hibernate is one of the most powerful combination of framework to access Database code with a minimum java code to write. Using Spring give also a very simple way to write unit testing for your database operation.
 
-Using Spring 3.0 + Hibernate give also a very simple way to write unit testing for your database operation.
-
+Of course Spring support JPA so the combination with Kundera works great. 
 
 == Components ==  
  # *Spring 3.0 Configuration: `applicationContext.xml`*
