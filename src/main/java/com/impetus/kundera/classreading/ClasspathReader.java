@@ -21,18 +21,22 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
 
 /**
  * The Class ClasspathReader.
- * 
+ *
  * @author animesh.kumar
  */
 public class ClasspathReader extends Reader {
 
-    /** The filter. */
+    /**
+     * The filter.
+     */
     private Filter filter;
+    private String basePackagetoScan;
 
     /**
      * Instantiates a new classpath reader.
@@ -41,11 +45,16 @@ public class ClasspathReader extends Reader {
         filter = new FilterImpl();
     }
 
+    public ClasspathReader(String basePackagetoScan) {
+        this.basePackagetoScan = basePackagetoScan;
+    }
+
     /*
      * (non-Javadoc)
      * 
      * @see com.impetus.kundera.classreading.Reader#read()
      */
+
     @Override
     public final void read() {
         URL[] resources = findResources();
@@ -67,12 +76,11 @@ public class ClasspathReader extends Reader {
     /**
      * Uses the java.class.path system property to obtain a list of URLs that
      * represent the CLASSPATH
-     * 
+     *
      * @return the UR l[]
      */
     @SuppressWarnings("deprecation")
-    @Override
-    public final URL[] findResources() {
+    public final URL[] findResourcesByClasspath() {
         List<URL> list = new ArrayList<URL>();
         String classpath = System.getProperty("java.class.path");
         StringTokenizer tokenizer = new StringTokenizer(classpath, File.pathSeparator);
@@ -92,20 +100,59 @@ public class ClasspathReader extends Reader {
         return list.toArray(new URL[list.size()]);
     }
 
+    /**
+     * Scan class resources into a basePackagetoScan path 
+     *
+     * @return list of class path included in the base package
+     */
+    public final URL[] findResourcesByContextLoader() {
+        List<URL> list = new ArrayList<URL>();
+
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        assert classLoader != null;
+        String path = basePackagetoScan.replace('.', '/');
+        Enumeration<URL> resources = null;
+        try {
+            resources = classLoader.getResources(path);
+            while (resources.hasMoreElements()) {
+                URL resource = resources.nextElement();
+                list.add(resource);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to scan base package", e);
+        }
+
+        return list.toArray(new URL[list.size()]);
+    }
+
+
+    @Override
+    public URL[] findResources() {
+        URL[] result = null;
+
+        if (basePackagetoScan != null) {
+             result = findResourcesByContextLoader();
+        } else {
+            result = findResourcesByClasspath();
+        }
+
+        return result;  //To change body of implemented methods use File | Settings | File Templates.
+    }
     /*
      * (non-Javadoc)
      * 
      * @see com.impetus.kundera.classreading.Reader#getFilter()
      */
+
     public final Filter getFilter() {
         return filter;
     }
 
+
     /**
      * Sets the filter.
-     * 
-     * @param filter
-     *            the new filter
+     *
+     * @param filter the new filter
      */
     public final void setFilter(Filter filter) {
         this.filter = filter;

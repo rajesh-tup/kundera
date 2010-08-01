@@ -49,8 +49,13 @@ public class TestKundera extends TestCase {
     /** The embedded server cassandra. */
     private static EmbeddedCassandraService cassandra;
 
-    
-    public void startCassandraServer () throws Exception {
+    /**
+     * Sets the up.
+     * 
+     * @throws java.lang.Exception * @throws Exception the exception
+     * @throws Exception the exception
+     */
+    public void setUp() throws Exception {
         URL configURL = TestKundera.class.getClassLoader().getResource("storage-conf.xml");
         try {
             String storageConfigPath = configURL.getFile().substring(1).substring(0, configURL.getFile().lastIndexOf("/"));
@@ -62,19 +67,8 @@ public class TestKundera extends TestCase {
         cassandra.init();
         Thread t = new Thread(cassandra);
         t.setDaemon(true);
-        t.start();   	
-    }
-    
-    /**
-     * Sets the up.
-     * 
-     * @throws java.lang.Exception * @throws Exception the exception
-     * @throws Exception the exception
-     */
-    public void setUp() throws Exception {
+        t.start();
 
-    	startCassandraServer();
-    	
         Map map = new HashMap();
         map.put("kundera.nodes", "localhost");
         // note : change it to 9160 if running in cassandra server mode the
@@ -96,7 +90,7 @@ public class TestKundera extends TestCase {
      * @throws Exception the exception
      */
     public void tearDown() throws Exception {
-    	manager.close();
+        manager.close();
         factory.close();
     }
 
