@@ -101,7 +101,7 @@ import java.util.List;
 @Service
 public class KuneraService {
     
-    @PersistenceContext
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager entityManager;
 
     public SimpleComment addComment(String id, String userId, String commentText) {
@@ -129,6 +129,8 @@ public class KuneraService {
 }
 
 }}}
+
+*It's very important to declare* `@PersistenceContext(type = PersistenceContextType.EXTENDED)` to prevent spring to close the Cassandra client at each transaction. But now you need to manage to close the client connection by yourself  
 
 == Conclusion ==
 We've see how it's easy to work with Spring + Kundera via JPA. With almost no code we've managed in Spring Container a whole set of Cassandra operation like create new Columns, multiple types of queries to cassandra via HQL language.
