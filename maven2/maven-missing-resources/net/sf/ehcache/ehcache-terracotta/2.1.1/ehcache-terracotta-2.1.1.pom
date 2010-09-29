@@ -1,0 +1,299 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>net.sf.ehcache</groupId>
+    <artifactId>ehcache-terracotta-root</artifactId>
+    <version>2.1.1</version>
+  </parent>
+
+  <artifactId>${express-jar.artifactId}</artifactId>
+  <name>${express-jar.artifactId}</name>
+  <packaging>jar</packaging>
+
+  <properties>
+    <express-jar.artifactId>ehcache-terracotta</express-jar.artifactId>
+    <express-jar.groupId>${project.groupId}</express-jar.groupId>
+    <express-jar.version>${project.version}</express-jar.version>
+    <exported-classes-jar>${project.build.directory}/exported-classes.jar</exported-classes-jar>
+    <public-api-classes-jar>${project.build.directory}/public-api-classes.jar</public-api-classes-jar>
+    <terracotta-l1.artifactId>terracotta-l1</terracotta-l1.artifactId>
+    <enterprise.packaging>open source</enterprise.packaging>
+
+    <sourceforge-snapshots.url>http://oss.sonatype.org/content/repositories/sourceforge-snapshots</sourceforge-snapshots.url>
+    <sourceforge-releases.url>http://oss.sonatype.org/service/local/staging/deploy/maven2</sourceforge-releases.url>
+    <skipJavadoc>false</skipJavadoc>
+  </properties>
+
+  <dependencies>
+    <!-- bootstrap code -->
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache-terracotta-bootstrap</artifactId>
+      <version>2.1.1</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.terracotta.api</groupId>
+      <artifactId>terracotta-api</artifactId>
+      <version>${terracotta-api.version}</version>
+      <optional>true</optional>
+    </dependency>
+      
+
+    <!-- Stuff that goes into L1 -->
+    <dependency>
+      <groupId>org.terracotta</groupId>
+      <artifactId>${terracotta-l1.artifactId}</artifactId>
+      <version>${terracotta.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- stuff that goes into TIMs -->
+    <dependency>
+      <groupId>org.terracotta.modules</groupId>
+      <artifactId>excludes-config</artifactId>
+      <version>${terracotta.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.terracotta.modules</groupId>
+      <artifactId>guimodels-config</artifactId>
+      <version>${terracotta.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.terracotta.modules</groupId>
+      <artifactId>jdk15-preinst-config</artifactId>
+      <version>${terracotta.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.terracotta.modules</groupId>
+      <artifactId>standard-config</artifactId>
+      <version>${terracotta.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- TIMs that we bundle in the standalone package -->
+    <dependency>
+      <groupId>org.terracotta.modules</groupId>
+      <artifactId>tim-ehcache-2.0</artifactId>
+      <version>${tim-ehcache-2.0.version}</version>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>              
+              <includeGroupIds>org.terracotta.modules</includeGroupIds>
+              <classifier>sources</classifier>
+              <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
+              <outputDirectory>${project.build.directory}/sources</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <skip>${skipJavadoc}</skip>
+              <quiet>true</quiet>
+              <sourcepath>${project.build.directory}/sources</sourcepath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>      
+
+      <plugin>
+        <groupId>org.terracotta.maven.plugins</groupId>
+        <artifactId>tc-maven-plugin</artifactId>
+        <version>${tc-maven-plugin.version}</version>
+        <configuration>
+          <bootJar>${project.build.directory}/dso-boot/dso-boot.jar</bootJar>
+          <overwriteBootjar>true</overwriteBootjar>
+        </configuration>
+        <executions>
+          <execution>
+            <id>create-bootjar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>bootjar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.terracotta.maven.plugins</groupId>
+        <artifactId>tc-build-maven-plugin</artifactId>
+        <version>${tc-build-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>build exported classes</id>
+            <phase>package</phase>
+            <configuration>
+              <jarLocation>${exported-classes-jar}</jarLocation>
+            </configuration>
+            <goals>
+              <goal>generate-exported-classes-jar</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>build public api classes</id>
+            <phase>package</phase>
+            <configuration>
+              <jarLocation>${public-api-classes-jar}</jarLocation>
+            </configuration>
+            <goals>
+              <goal>generate-public-api-classes-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.3</version>
+        <configuration>
+          <tasks>
+            <unzip src="${project.build.directory}/dso-boot/dso-boot.jar"
+                   dest="${project.build.directory}/dso-boot/unpacked">
+              <patternset>
+                <include name="com/tc/**" />
+                <include name="com/tcclient/**" />
+
+                <!--
+                  XXX: We can remove this if we ever stop using
+                  TLinkable in com.tc.object.cache.Cacheable
+                -->
+                <include name="gnu/**" />
+              </patternset>
+            </unzip>
+
+            <unzip src="${project.build.directory}/dso-boot/dso-boot.jar"
+                   dest="${project.build.directory}/public-api-classes/unpacked">
+              <patternset>
+                <include name="com/tc/cluster/**" />
+                <include name="com/tcclient/cluster/DsoNode.class" />
+              </patternset>
+            </unzip>
+
+
+            <zip destfile="${project.build.directory}/dso-boot/dso-boot.jar"
+                 basedir="${project.build.directory}/dso-boot/unpacked"
+                 update="false">              
+            </zip>
+
+            <!-- the public api classes need to live in the express jar itself to be available to the application's classpath -->
+            <unzip src="${public-api-classes-jar}"
+                   dest="${project.build.directory}/public-api-classes/unpacked">
+            </unzip>
+            <zip destfile="${public-api-classes-jar}"
+                 basedir="${project.build.directory}/public-api-classes/unpacked"
+                 update="false">
+            </zip>
+
+            <unzip src="${public-api-classes-jar}"
+                   dest="${project.build.directory}/classes">
+            </unzip>
+          </tasks>
+        </configuration>
+        <executions>
+          <execution>
+            <id>unjar-classes</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2-beta-5</version>
+        <configuration>
+          <finalName>${express-jar.artifactId}-${express-jar.version}</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
+          <attach>true</attach>
+          <descriptors>
+            <descriptor>${basedir}/src/main/assembly/bin.xml</descriptor>
+          </descriptors>
+          <archive>
+            <manifestEntries>
+              <Terracotta-Category>Product</Terracotta-Category>
+              <Terracotta-ArtifactCoordinates>${express-jar.groupId}:${express-jar.artifactId}:${express-jar.version}</Terracotta-ArtifactCoordinates>
+              <Terracotta-RequireVersion>${terracotta.version}</Terracotta-RequireVersion>
+              <Terracotta-Require></Terracotta-Require>
+              <Terracotta-ProjectStatus>Supported</Terracotta-ProjectStatus>
+              <Terracotta-InternalTIM>false</Terracotta-InternalTIM>
+              <Terracotta-DownloadPath>../../ehcache</Terracotta-DownloadPath>
+              <Terracotta-Name>${express-jar.artifactId}</Terracotta-Name>
+              <Terracotta-Description>${project.description}</Terracotta-Description>
+              <Terracotta-Kit>${enterprise.packaging}</Terracotta-Kit>
+            </manifestEntries>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+
+  <profiles>
+    <profile>
+      <id>package-ee</id>
+      <properties>
+        <express-jar.artifactId>ehcache-terracotta-ee</express-jar.artifactId>
+        <terracotta-l1.artifactId>terracotta-l1-ee</terracotta-l1.artifactId>
+        <enterprise.packaging>enterprise</enterprise.packaging>
+      </properties>
+    </profile>
+  </profiles>
+
+  <repositories>
+    <repository>
+      <id>terracotta-repository</id>
+      <url>http://www.terracotta.org/download/reflector/releases</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>terracotta-repository</id>
+      <url>http://www.terracotta.org/download/reflector/releases</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>
