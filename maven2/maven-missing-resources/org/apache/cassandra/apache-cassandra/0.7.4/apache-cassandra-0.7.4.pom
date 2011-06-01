@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.cassandra</groupId>
+  <artifactId>apache-cassandra</artifactId>
+  <version>0.7.4</version>
+  <packaging>pom</packaging>
+  <name>Apache Cassandra</name>
+  <description>The Apache Cassandra Project develops a highly scalable second-generation distributed database, bringing together Dynamo's fully distributed design and Bigtable's ColumnFamily-based data model.</description>
+  <url>http://cassandra.apache.org</url>
+  <inceptionYear>2009</inceptionYear>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>alakshman</id>
+      <name>Avinash Lakshman</name>
+    </developer>
+    <developer>
+      <id>antelder</id>
+      <name>Anthony Elder</name>
+    </developer>
+    <developer>
+      <id>brandonwilliams</id>
+      <name>Brandon Williams</name>
+    </developer>
+    <developer>
+      <id>eevans</id>
+      <name>Eric Evans</name>
+    </developer>
+    <developer>
+      <id>gdusbabek</id>
+      <name>Gary Dusbabek</name>
+    </developer>
+    <developer>
+      <id>goffinet</id>
+      <name>Chris Goffinet</name>
+    </developer>
+    <developer>
+      <id>ianh</id>
+      <name>Ian Holsman</name>
+    </developer>
+    <developer>
+      <id>jaakko</id>
+      <name>Laine Jaakko Olavi</name>
+    </developer>
+    <developer>
+      <id>jbellis</id>
+      <name>Jonathan Ellis</name>
+    </developer>
+    <developer>
+      <id>johan</id>
+      <name>Johan Oskarsson</name>
+    </developer>
+    <developer>
+      <id>junrao</id>
+      <name>Jun Rao</name>
+    </developer>
+    <developer>
+      <id>mriou</id>
+      <name>Matthieu Riou</name>
+    </developer>
+    <developer>
+      <id>pmalik</id>
+      <name>Prashant Malik</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/cassandra/branches/cassandra-0.7@1080811</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/cassandra/branches/cassandra-0.7@1080811</developerConnection>
+    <url>http://svn.apache.org/viewvc/cassandra/branches/cassandra-0.7?pathrev=1080811</url>
+  </scm>
+</project>
