@@ -4,9 +4,9 @@
   <artifactId>scale7pelops</artifactId>
   <version>1.2.0.7-SNAPSHOT</version>
   <versioning>
-    <versions>
-      <version>1.2.0.7-SNAPSHOT</version>
-    </versions>
+    <snapshot>
+      <localCopy>true</localCopy>
+    </snapshot>
     <lastUpdated>20110610101030</lastUpdated>
   </versioning>
 </metadata>
