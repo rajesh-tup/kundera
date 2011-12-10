@@ -38,7 +38,11 @@
 			<artifactId>scale7-pelops</artifactId>
 			<version>1.2-0.7.x-SNAPSHOT</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solandra</artifactId>
+			<version>UNKNOWN</version>
+		</dependency>
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>snappy</artifactId>
