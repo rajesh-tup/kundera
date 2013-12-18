@@ -1,0 +1,14 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Wed Dec 18 14:50:56 IST 2013
+https\://github.com/s7/mvnrepo/raw/master/.error=
+http\://mirrors.ibiblio.org/pub/mirrors/maven/.error=
+http\://repo.maven.apache.org/maven2/.lastUpdated=1387358456792
+http\://repo.maven.apache.org/maven2/.error=
+http\://mvn.riptano.com/content/repositories/public/.lastUpdated=1387358452047
+http\://mvn.riptano.com/content/repositories/public/.error=
+https\://github.com/s7/mvnrepo/raw/master/.lastUpdated=1387358456201
+http\://kundera.googlecode.com/svn/maven2/maven-missing-resources/.lastUpdated=1387358451515
+http\://repo1.maven.org/maven2/.lastUpdated=1387358448592
+http\://repo1.maven.org/maven2/.error=
+http\://kundera.googlecode.com/svn/maven2/maven-missing-resources/.error=
+http\://mirrors.ibiblio.org/pub/mirrors/maven/.lastUpdated=1387358451059

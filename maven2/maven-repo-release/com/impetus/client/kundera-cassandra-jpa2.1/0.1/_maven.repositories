@@ -1,0 +1,7 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Wed Dec 18 16:35:24 IST 2013
+kundera-cassandra-jpa2.1-0.1.pom>=
+kundera-cassandra-jpa2.1-0.1-javadoc.jar>=
+kundera-cassandra-jpa2.1-0.1-tests.jar>=
+kundera-cassandra-jpa2.1-0.1.jar>=
+kundera-cassandra-jpa2.1-0.1-sources.jar>=

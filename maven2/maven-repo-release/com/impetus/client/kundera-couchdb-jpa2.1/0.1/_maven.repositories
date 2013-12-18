@@ -1,0 +1,7 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Wed Dec 18 16:37:47 IST 2013
+kundera-couchdb-jpa2.1-0.1.jar>=
+kundera-couchdb-jpa2.1-0.1-sources.jar>=
+kundera-couchdb-jpa2.1-0.1.pom>=
+kundera-couchdb-jpa2.1-0.1-tests.jar>=
+kundera-couchdb-jpa2.1-0.1-javadoc.jar>=
