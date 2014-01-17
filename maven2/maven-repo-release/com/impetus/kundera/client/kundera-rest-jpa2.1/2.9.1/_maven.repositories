@@ -1,0 +1,7 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Fri Jan 17 19:25:00 IST 2014
+kundera-rest-jpa2.1-2.9.1.pom>=
+kundera-rest-jpa2.1-2.9.1-tests.jar>=
+kundera-rest-jpa2.1-2.9.1-javadoc.jar>=
+kundera-rest-jpa2.1-2.9.1.jar>=
+kundera-rest-jpa2.1-2.9.1-sources.jar>=

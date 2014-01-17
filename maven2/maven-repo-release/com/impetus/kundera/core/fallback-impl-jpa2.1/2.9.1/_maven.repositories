@@ -1,0 +1,7 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Fri Jan 17 19:24:02 IST 2014
+fallback-impl-jpa2.1-2.9.1.pom>=
+fallback-impl-jpa2.1-2.9.1-javadoc.jar>=
+fallback-impl-jpa2.1-2.9.1-tests.jar>=
+fallback-impl-jpa2.1-2.9.1.jar>=
+fallback-impl-jpa2.1-2.9.1-sources.jar>=

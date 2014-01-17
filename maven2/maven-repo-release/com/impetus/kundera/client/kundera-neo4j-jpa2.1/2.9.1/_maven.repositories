@@ -1,0 +1,7 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Fri Jan 17 19:24:53 IST 2014
+kundera-neo4j-jpa2.1-2.9.1-tests.jar>=
+kundera-neo4j-jpa2.1-2.9.1-javadoc.jar>=
+kundera-neo4j-jpa2.1-2.9.1.pom>=
+kundera-neo4j-jpa2.1-2.9.1-sources.jar>=
+kundera-neo4j-jpa2.1-2.9.1.jar>=

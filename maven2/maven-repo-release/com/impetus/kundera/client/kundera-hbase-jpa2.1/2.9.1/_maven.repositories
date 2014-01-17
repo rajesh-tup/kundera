@@ -1,0 +1,7 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Fri Jan 17 19:24:34 IST 2014
+kundera-hbase-jpa2.1-2.9.1-tests.jar>=
+kundera-hbase-jpa2.1-2.9.1-sources.jar>=
+kundera-hbase-jpa2.1-2.9.1.jar>=
+kundera-hbase-jpa2.1-2.9.1.pom>=
+kundera-hbase-jpa2.1-2.9.1-javadoc.jar>=
